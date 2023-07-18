@@ -1,0 +1,41 @@
+#!/bin/python3
+
+import math
+import os
+ #abc
+ # d 
+#efg 
+#d is diaram indecate 
+
+def hourglassSum(arr):
+    max_sum = float('-inf')  # Initialize the maximum sum as negative infinity
+
+    # Iterate over the 2D array, excluding the border elements
+    for i in range(1, len(arr) - 1):
+        for j in range(1, len(arr[i]) - 1):
+            # Calculate the sum of the current hourglass
+            #  a=arr[i-1][j-1] , b=arr[i-1][j], c=arr[i-1][j+1], d=arr[i][j], e=arr[i+1][j-1], f=arr[i+1][j],g=arr[i+1][j+1]
+            current_sum = (
+                arr[i-1][j-1] + arr[i-1][j] + arr[i-1][j+1] +
+                arr[i][j] +
+                arr[i+1][j-1] + arr[i+1][j] + arr[i+1][j+1]
+            )
+            
+            # Update the maximum sum if the current sum is greater
+            max_sum = max(max_sum, current_sum)
+
+    return max_sum
+
+if __name__ == '__main__':
+    fptr = open(os.environ['OUTPUT_PATH'], 'w')
+
+    arr = []
+
+    for _ in range(6):
+        arr.append(list(map(int, input().rstrip().split())))
+
+    result = hourglassSum(arr)
+
+    fptr.write(str(result) + '\n')
+
+    fptr.close()
